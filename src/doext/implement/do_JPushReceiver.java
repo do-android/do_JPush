@@ -65,7 +65,10 @@ public class do_JPushReceiver extends BroadcastReceiver {
 				e.printStackTrace();
 			}
 			try {
-				processCustomMessage(context, bundle);
+				SharedPreferences sp = context.getSharedPreferences("do_JPush_Ringing", Context.MODE_PRIVATE);
+				boolean _isDisplay = sp.getBoolean("isDisplay", false);
+				if (_isDisplay)
+					processCustomMessage(context, bundle);
 			} catch (NameNotFoundException e) {
 				e.printStackTrace();
 			}

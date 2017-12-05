@@ -61,6 +61,10 @@ public class do_JPush_Model extends DoSingletonModule implements do_JPush_IMetho
 			setRinging(_dictParas, _scriptEngine, _invokeResult);
 			return true;
 		}
+		if ("setCustomMessageDisplay".equals(_methodName)) {
+			setCustomMessageDisplay(_dictParas, _scriptEngine, _invokeResult);
+			return true;
+		}
 		return super.invokeSyncMethod(_methodName, _dictParas, _scriptEngine, _invokeResult);
 	}
 
@@ -219,6 +223,13 @@ public class do_JPush_Model extends DoSingletonModule implements do_JPush_IMetho
 		String _ringing = DoJsonHelper.getString(_dictParas, "ringing", "");
 		_ringing = DoIOHelper.getLocalFileFullPath(_scriptEngine.getCurrentApp(), _ringing);
 		editor.putString("ringing", _ringing);
+		editor.commit();
+	}
+
+	@Override
+	public void setCustomMessageDisplay(JSONObject _dictParas, DoIScriptEngine _scriptEngine, DoInvokeResult _invokeResult) throws Exception {
+		boolean _isDisplay = DoJsonHelper.getBoolean(_dictParas, "isDisplay", false);
+		editor.putBoolean("isDisplay", _isDisplay);
 		editor.commit();
 	}
 }
